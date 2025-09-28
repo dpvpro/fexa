@@ -25,14 +25,6 @@ go run main.go [directory]
 
 ## Usage
 
-### Basic usage (scan current directory):
-
-```bash
-./fexa
-```
-
-### Scan specific directory:
-
 ```bash
 ./fexa /path/to/directory
 ```

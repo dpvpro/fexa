@@ -30,37 +30,29 @@ func getExtension(filename string) string {
 	return strings.ToLower(ext)
 }
 
-func walkDirectory(dir string) (map[string]int64, error) {
-	extensionSizes := make(map[string]int64)
-
-	err := filepath.WalkDir(dir, func(path string, d fs.DirEntry, err error) error {
-		if err != nil {
-			// Log error but continue walking
-			fmt.Fprintf(os.Stderr, "Error accessing %s: %v\n", path, err)
-			return nil
-		}
-
-		// Skip directories
-		if d.IsDir() {
-			return nil
-		}
-
-		// Get file info
-		info, err := d.Info()
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "Error getting info for %s: %v\n", path, err)
-			return nil
-		}
-
-		// Get extension and add size
-		ext := getExtension(d.Name())
-		extensionSizes[ext] += info.Size()
-
+func fileHandler(path string, d fs.DirEntry, err error) error {
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error accessing %s: %v\n", path, err)
 		return nil
-	})
+	}
 
-	return extensionSizes, err
+	if d.IsDir() {
+		return nil
+	}
+
+	info, err := d.Info()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error getting info for %s: %v\n", path, err)
+		return nil
+	}
+
+	ext := getExtension(d.Name())
+	extensionSizes[ext] += info.Size()
+
+	return nil
 }
+
+var extensionSizes = make(map[string]int64)
 
 type ExtensionSize struct {
 	Extension string
@@ -92,7 +84,7 @@ func main() {
 	fmt.Printf("Scanning directory: %s\n", absDir)
 	fmt.Println(strings.Repeat("-", 70))
 
-	extensionSizes, err := walkDirectory(dir)
+	err = filepath.WalkDir(dir, fileHandler)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error walking directory: %v\n", err)
 		os.Exit(1)
