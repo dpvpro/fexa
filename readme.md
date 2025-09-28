@@ -64,7 +64,7 @@ Total extensions found: 8
 - **Human-readable output**: File sizes are formatted in appropriate units (B, KB, MB, GB, etc.)
 - **Sorted results**: Extensions are sorted by total size (largest first)
 - **Percentage calculation**: Shows what percentage of total size each extension represents
-- **No extension handling**: Files without extensions are grouped as "(no extension)"
+- **No extension handling**: Files without extensions are grouped as "no extension"
 
 ## Error Handling
 
@@ -73,7 +73,3 @@ The program handles various error cases:
 - Non-existent directories will show an error message
 - Files that cannot be accessed are logged to stderr but don't stop the scan
 - If a path points to a file instead of a directory, an error is displayed
-
-## License
-
-This project is open source and available under the MIT License.
