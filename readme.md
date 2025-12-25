@@ -1,6 +1,6 @@
-# File Size Aggregator by Extension
+# File size aggregator by extension
 
-A Go program that recursively scans a directory and calculates the total size of files grouped by their extensions.
+A program that recursively scans a directory and calculates the total size of files grouped by their extensions.
 
 ## Description
 
@@ -11,22 +11,22 @@ This utility walks through a specified directory (and all its subdirectories) to
 - Human-readable file sizes (B, KB, MB, GB, etc.)
 - Files are sorted by total size in descending order
 
-## Installation
+## Build
 
 ```bash
-go build -o fexa main.go
-```
-
-Or run directly:
-
-```bash
-go run main.go [directory]
+go build -o fexa .
 ```
 
 ## Usage
 
 ```bash
 ./fexa /path/to/directory
+```
+
+Or run directly:
+
+```bash
+go run main.go /path/to/directory
 ```
 
 ## Output Example
