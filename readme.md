@@ -19,11 +19,13 @@ go build -o fexa .
 
 ## Usage
 
+Run binary file:
+
 ```bash
 ./fexa /path/to/directory
 ```
 
-Or run directly:
+Or run directly go code:
 
 ```bash
 go run main.go /path/to/directory
@@ -57,11 +59,3 @@ Total extensions found: 8
 - **Sorted results**: Extensions are sorted by total size (largest first)
 - **Percentage calculation**: Shows what percentage of total size each extension represents
 - **No extension handling**: Files without extensions are grouped as "no extension"
-
-## Error Handling
-
-The program handles various error cases:
-
-- Non-existent directories will show an error message
-- Files that cannot be accessed are logged to stderr but don't stop the scan
-- If a path points to a file instead of a directory, an error is displayed
